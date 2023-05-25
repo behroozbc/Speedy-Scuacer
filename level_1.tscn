@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn3uyg6yrrt46"]
+
+[ext_resource type="Script" path="res://level_1.cs" id="1_a3rlb"]
+[ext_resource type="Texture2D" uid="uid://cufuih55qo3mh" path="res://purple.png" id="1_ff20i"]
+[ext_resource type="PackedScene" uid="uid://bl48va3x7nn7m" path="res://player.tscn" id="2_aoydp"]
+[ext_resource type="PackedScene" uid="uid://d02hlr7iptgo6" path="res://maze.tscn" id="3_3453d"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_a3rlb")
+
+[node name="Graphicis" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Graphicis"]
+layer = -10
+
+[node name="Background" type="TextureRect" parent="Graphicis/CanvasLayer"]
+z_index = -100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ff20i")
+stretch_mode = 1
+
+[node name="Ruleslbl" type="Label" parent="Graphicis"]
+offset_left = 593.0
+offset_top = 101.0
+offset_right = 723.0
+offset_bottom = 153.0
+text = "Rules:
+تست فارسی هستش"
+
+[node name="Endlbl" type="Label" parent="Graphicis"]
+offset_left = 896.0
+offset_top = -22.0
+offset_right = 936.0
+offset_bottom = 4.0
+text = "End"
+
+[node name="Startlbl" type="Label" parent="Graphicis"]
+offset_left = 318.0
+offset_top = 96.0
+offset_right = 358.0
+offset_bottom = 122.0
+text = "Start"
+
+[node name="Player" parent="." instance=ExtResource("2_aoydp")]
+z_index = 1
+position = Vector2(260, 159)
+gravity_scale = 0.0
+
+[node name="Maze" parent="." instance=ExtResource("3_3453d")]
+position = Vector2(332, 231)
+
+[connection signal="body_exited" from="Maze" to="." method="OnMazeBodyExited"]
